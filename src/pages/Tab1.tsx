@@ -23,11 +23,16 @@ const Tab1: React.FC = () => {
     <IonCard>
       <img alt="Silhouette of mountains" src="../src/assets/img/avatar.jpg" />
 
+      {/* <video controls>
+        <source src="../src/assets/videos/INTRO_VIDEO.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video> */}
+
       <IonRow>
-        <IonCol size="3">
+        <IonCol size="4">
           <img alt="Silhouette of mountains" id="profile_pic" src="../src/assets/img/ARSY_CIRCLE_GREEN_PNG.png" />
         </IonCol>
-        <IonCol size="9">
+        <IonCol size="8">
           <IonCardHeader>
             <IonCardTitle>Ryan P. Cepada</IonCardTitle>
             <IonCardSubtitle>NBSC-BSIT Student</IonCardSubtitle>
@@ -41,7 +46,7 @@ const Tab1: React.FC = () => {
       <IonButton id="present-alert" expand="block" color="primary">Quick Facts</IonButton>
       <IonAlert
         trigger="present-alert"
-        header="Would you like to explore Quick Facts?"
+        header="Explore Quick Facts?"
         subHeader="Unlock valuable insights"
         message="Discover a wealth of information with Quick Facts."
         buttons={['Learn More']}
