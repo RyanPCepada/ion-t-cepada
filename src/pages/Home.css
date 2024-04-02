@@ -1,0 +1,15 @@
+.horizontal-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Adjust as per your need */
+    padding: 0; /* Optional: Remove default padding */
+  }
+
+.circular-button {
+  border-radius: 50%;
+}
+
+/* #profile{
+    width: 20px;
+} */
+  
