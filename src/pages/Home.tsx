@@ -57,19 +57,28 @@ const Home: React.FC = () => {
         {/* Photos, Videos, and Reels Section */}
         <IonFooter>
           <IonToolbar>
-            <IonButton color="light" slot="start">
+            <IonButton color="primary" slot="start">
               <IonIcon icon={camera} />
               <IonText>Photos</IonText>
             </IonButton>
-            <IonButton color="light" slot="start">
+            <IonButton color="primary" slot="start">
               <IonIcon icon={videocam} />
               <IonText>Videos</IonText>
             </IonButton>
-            <IonButton color="light" slot="start">
+            <IonButton color="primary" slot="start">
               <IonIcon icon={albums} />
               <IonText>Reels</IonText>
             </IonButton>
           </IonToolbar>
+
+          <IonToolbar color="success">
+            <img src="../src/assets/img/ARSY_CIRCLE_GREEN_PNG.png" alt="profile" />
+            <IonText style={{ textAlign: 'center' }}>
+              I am Ryan P. Cepada and this is my Home page
+            </IonText>
+
+          </IonToolbar>
+
         </IonFooter>
 
       </IonContent>
