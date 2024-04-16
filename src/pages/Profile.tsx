@@ -5,7 +5,11 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, 
 import ExploreContainer from '../components/ExploreContainer';
 import './Profile.css';
 
+
 const Profile: React.FC = () => {
+
+const Tab1: React.FC = () => {
+
   return (
     <IonPage>
       <IonHeader>
@@ -85,4 +89,8 @@ const Profile: React.FC = () => {
   );
 };
 
+
 export default Profile;
+
+export default Tab1;
+

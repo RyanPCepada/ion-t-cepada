@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonGrid, IonRow, IonCol, IonBackButton, IonButtons } from '@ionic/react';
 
 const Click_counter: React.FC = () => {
+
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonGrid, IonRow, IonCol } from '@ionic/react';
+
+const Tab2: React.FC = () => {
+
   const [counter, setCounter] = useState<number>(0);
 
   const incrementCounter = () => {
@@ -19,10 +25,13 @@ const Click_counter: React.FC = () => {
           <IonTitle>Click Counter</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       
       <IonButtons slot="start">
         <IonBackButton defaultHref="/" />
       </IonButtons>
+
+
       <IonContent fullscreen className="ion-padding" style={{ backgroundColor: '#f0f0f0' }}>
         <IonGrid>
           <IonRow className="ion-align-items-center">
@@ -51,4 +60,8 @@ const Click_counter: React.FC = () => {
   );
 };
 
+
 export default Click_counter;
+
+export default Tab2;
+

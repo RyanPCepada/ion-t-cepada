@@ -32,6 +32,7 @@ const Home: React.FC = () => {
         </IonToolbar>
         <hr />
       </IonHeader>
+
       <IonContent fullscreen className="ion-padding">
         <div className="ion-text-center"> {/* Centering content */}
           <IonCard onClick={goToClickCounter} style={{ width: '350px', cursor: 'pointer' }} color="primary">
@@ -61,6 +62,51 @@ const Home: React.FC = () => {
             </IonCardContent>
           </IonCard>
         </div>
+
+      <IonContent fullscreen>
+        {/* Post Section */}
+        <IonList>
+          {/* Post Status */}
+          <IonItem>
+            <IonAvatar slot="start">
+              <img src="../src/assets/img/ARSY_CIRCLE_GREEN_PNG.png" alt="profile" />
+            </IonAvatar>
+            <IonTextarea auto-grow placeholder="What's on your mind?" />
+          </IonItem>
+          {/* End Post Status */}
+
+          {/* Add more posts here */}
+
+        </IonList>
+
+        {/* Photos, Videos, and Reels Section */}
+        <IonFooter>
+          <IonToolbar>
+            <IonButton color="primary" slot="start">
+              <IonIcon icon={camera} />
+              <IonText>Photos</IonText>
+            </IonButton>
+            <IonButton color="primary" slot="start">
+              <IonIcon icon={videocam} />
+              <IonText>Videos</IonText>
+            </IonButton>
+            <IonButton color="primary" slot="start">
+              <IonIcon icon={albums} />
+              <IonText>Reels</IonText>
+            </IonButton>
+          </IonToolbar>
+
+          <IonToolbar color="success">
+            <img src="../src/assets/img/ARSY_CIRCLE_GREEN_PNG.png" alt="profile" />
+            <IonText style={{ textAlign: 'center' }}>
+              I am Ryan P. Cepada and this is my Home page
+            </IonText>
+
+          </IonToolbar>
+
+        </IonFooter>
+
+
       </IonContent>
     </IonPage>
   );

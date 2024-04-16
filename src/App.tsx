@@ -49,6 +49,7 @@ const App: React.FC = () => (
             <Home />
           </Route>
 
+
           {/* 
           <Route exact path="/profile">
             <Profile />
@@ -67,6 +68,16 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/profile">
             <Profile />
+
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+          <Route exact path="/click_counter">
+            <Click_counter />
+          </Route>
+          <Route path="/calculator">
+            <Calculator />
+
           </Route>
 
         </IonRouterOutlet>
@@ -75,13 +86,20 @@ const App: React.FC = () => (
             <IonIcon aria-hidden="true" icon={home} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
+
           
           {/*
+
+
           <IonTabButton tab="profile" href="/profile">
             <IonIcon aria-hidden="true" icon={personCircleOutline} />
             <IonLabel>Profile</IonLabel>
           </IonTabButton>
+
           <IonTabButton tab="click_counter" href="/click_counter">
+
+          <IonTabButton tab="click-counter" href="/click-counter">
+
             <IonIcon aria-hidden="true" icon={fingerPrintOutline} />
             <IonLabel>Click Counter</IonLabel>
           </IonTabButton>
