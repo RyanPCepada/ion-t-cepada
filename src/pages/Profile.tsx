@@ -4,6 +4,8 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRow, IonCol } 
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonAlert, IonButton, IonActionSheet } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Profile.css';
+// Import the video file directly
+import selfIntroVideo from '../assets/img/self_intro_video.mp4';
 
 const Profile: React.FC = () => {
   return (
@@ -22,11 +24,15 @@ const Profile: React.FC = () => {
         
     <IonCard>
       {/* <img alt="Silhouette of mountains" src="../src/assets/img/avatar.jpg" /> */}
-      <img alt="" id="calculator" src="../src/assets/img/self_intro.gif" />
+      {/* <img alt="" id="gif_video" src="../src/assets/img/self_intro_gif.gif" /> */}
+      
+          {/* Display the video */}
+          <video controls src={selfIntroVideo} id="video" style={{ maxWidth: '100%', height: 'auto' }} />
+
 
       <IonRow>
         <IonCol size="4">
-          <img alt="Silhouette of mountains" id="profile_pic" src="../src/assets/img/ARSY_CIRCLE_GREEN_PNG.png" />
+          <img alt="Profile" id="profile_pic" src="../src/assets/img/ARSY_CIRCLE_GREEN_PNG.png" className="profile-pic-animation" />
         </IonCol>
         <IonCol size="8">
           <IonCardHeader>
