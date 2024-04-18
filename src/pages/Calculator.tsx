@@ -39,79 +39,79 @@ const Calculator: React.FC = () => {
         </IonButtons>
         <IonContent fullscreen className="ion-padding" style={{ backgroundColor: 'dark' }}>
           <IonGrid>
-            <IonRow>
-              <IonCol size="12">
-                <IonInput style={{ fontSize: '50px' }} value={input} readonly={true} className="ion-text-right" />
-              </IonCol>
-            </IonRow>
+          <IonRow>
+            <IonCol size="12" style={{ height: '70px', fontSize: '60px', marginBottom: '30px', backgroundColor: 'rgb(25, 25, 25)' }}>
+              <IonInput style={{ fontSize: '40px', color: 'white', marginTop: '7px' }} value={input} readonly={true} className="ion-text-right" />
+            </IonCol>
+          </IonRow>
 
           <IonRow>
             <IonCol size="6">
-              <IonButton id="btns" expand="full" color="warning" onClick={handleClear}>C</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={handleClear} style={{ fontSize: '20px', height: '50px'}}>C</IonButton>
             </IonCol>
             <IonCol size="6">
-              <IonButton id="btns" expand="full" color="danger" onClick={handleDelete}>DEL</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={handleDelete} style={{ fontSize: '20px', height: '50px'}}>DEL</IonButton>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('7')}>7</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('7')} style={{ fontSize: '20px'}}>7</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('8')}>8</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('8')} style={{ fontSize: '20px'}}>8</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('9')}>9</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('9')} style={{ fontSize: '20px'}}>9</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="tertiary" onClick={() => handleInput('/')}>/</IonButton>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('4')}>4</IonButton>
-            </IonCol>
-            <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('5')}>5</IonButton>
-            </IonCol>
-            <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('6')}>6</IonButton>
-            </IonCol>
-            <IonCol size="3">
-              <IonButton id="btns" expand="full" color="tertiary" onClick={() => handleInput('*')}>*</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('/')} style={{ fontSize: '20px'}}>/</IonButton>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('1')}>1</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('4')} style={{ fontSize: '20px'}}>4</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('2')}>2</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('5')} style={{ fontSize: '20px'}}>5</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('3')}>3</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('6')} style={{ fontSize: '20px'}}>6</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="tertiary" onClick={() => handleInput('-')}>-</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('*')} style={{ fontSize: '20px'}}>*</IonButton>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('.')}>.</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('1')} style={{ fontSize: '20px'}}>1</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('0')}>0</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('2')} style={{ fontSize: '20px'}}>2</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="primary" onClick={() => handleInput('00')}>00</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('3')} style={{ fontSize: '20px'}}>3</IonButton>
             </IonCol>
             <IonCol size="3">
-              <IonButton id="btns" expand="full" color="tertiary" onClick={() => handleInput('+')}>+</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('-')} style={{ fontSize: '20px'}}>-</IonButton>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="3">
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('.')} style={{ fontSize: '20px'}}>.</IonButton>
+            </IonCol>
+            <IonCol size="3">
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('0')} style={{ fontSize: '20px'}}>0</IonButton>
+            </IonCol>
+            <IonCol size="3">
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('00')} style={{ fontSize: '20px'}}>00</IonButton>
+            </IonCol>
+            <IonCol size="3">
+              <IonButton id="btns" expand="full" color="light" onClick={() => handleInput('+')} style={{ fontSize: '20px'}}>+</IonButton>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol size="12">
-              <IonButton id="btns" expand="full" color="success" onClick={handleCalculate}>=</IonButton>
+              <IonButton id="btns" expand="full" color="light" onClick={handleCalculate} style={{ fontSize: '20px', height: '50px'}}>=</IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>
