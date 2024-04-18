@@ -21,8 +21,8 @@ const Profile: React.FC = () => {
         </IonHeader>
         
     <IonCard>
-      <img alt="Silhouette of mountains" src="../src/assets/img/avatar.jpg" />
-      {/* <img alt="" id="calculator" src="../src/assets/img/self_intro.gif" /> */}
+      {/* <img alt="Silhouette of mountains" src="../src/assets/img/avatar.jpg" /> */}
+      <img alt="" id="calculator" src="../src/assets/img/self_intro.gif" />
 
       <IonRow>
         <IonCol size="4">
