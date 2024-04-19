@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonGrid, IonRow, IonCol, IonBackButton, IonButtons, IonList, IonItem, IonLabel, IonCheckbox, IonInput, IonIcon } from '@ionic/react';
-import { trashOutline, createOutline } from 'ionicons/icons';
+import { trashOutline, createOutline, add } from 'ionicons/icons'; // Import the add icon
+
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
 
 const TodoList: React.FC = () => {
-  const [todos, setTodos] = useState([]);
-  const [newTodoText, setNewTodoText] = useState('');
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [newTodoText, setNewTodoText] = useState<string>('');
 
   const toggleTodo = (id: number) => {
     setTodos(prevTodos =>
@@ -47,47 +53,57 @@ const TodoList: React.FC = () => {
           <IonTitle>Todo List</IonTitle>
         </IonToolbar>
       </IonHeader>
-      
       <IonButtons slot="start">
         <IonBackButton defaultHref="/" />
       </IonButtons>
-      <IonContent fullscreen className="ion-padding" style={{ backgroundColor: '#f0f0f0' }}>
+      <IonContent>
         <IonGrid>
-          <IonRow className="ion-align-items-center">
-            <IonCol size="12" className="ion-text-center">
-              <h1>Todo List</h1>
+          <IonRow style={{ marginBottom: '0.5em' }}>
+            <IonCol>
+            <IonInput
+              placeholder="Enter a task"
+              value={newTodoText}
+              onIonChange={(e: any) => setNewTodoText(e.target.value)}
+              style={{
+                  width: '350px',
+                  borderBottom: '1px solid gray' // Add white line below the input field
+              }}
+            />
+
+            </IonCol>
+            <IonCol style={{ marginLeft: '0px'}}>
+              <IonIcon icon={add} onClick={addTodo} style={{ fontSize: '35px', borderRadius: '50%', backgroundColor: 'var(--ion-color-primary)' }} />
             </IonCol>
           </IonRow>
-          <IonRow>
-            <IonCol size="12">
-              <IonInput
-                placeholder="Enter a task"
-                value={newTodoText}
-                onIonChange={(e) => setNewTodoText(e.detail.value!)}
-              />
-              <IonButton expand="block" onClick={addTodo}>Add Task</IonButton>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="12">
-              <IonList>
-                {todos.map(todo => (
-                  <IonItem key={todo.id}>
-                    <IonLabel>{todo.text}</IonLabel>
-                    <div className="ion-text-end">
-                      <IonButton fill="clear" onClick={() => editTodo(todo.id, prompt("Edit task:", todo.text))}>
-                        <IonIcon icon={createOutline} />
-                      </IonButton>
-                      <IonButton fill="clear" onClick={() => deleteTodo(todo.id)}>
-                        <IonIcon icon={trashOutline} />
-                      </IonButton>
-                    </div>
-                    <IonCheckbox slot="start" checked={todo.completed} onIonChange={() => toggleTodo(todo.id)} />
-                  </IonItem>
-                ))}
-              </IonList>
-            </IonCol>
-          </IonRow>
+          {todos.map(todo => (
+            <IonRow key={todo.id} style={{ margin: '0.1 em 0' }}>
+              <IonCol>
+              <IonItem key={todo.id}>
+                <IonLabel>
+                    <h2 style={{ marginLeft: '30px', textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text}</h2>
+                </IonLabel>
+                <IonCheckbox
+                    slot="start"
+                    checked={todo.completed}
+                    onIonChange={() => toggleTodo(todo.id)}
+                    style={{ width: '20px', position: 'absolute', backgroundColor: 'transparent' }}
+                />
+                <IonButton fill="clear" onClick={() => {
+                    const newText = prompt("Edit todo", todo.text);
+                    if (newText !== null) {
+                    editTodo(todo.id, newText);
+                    }
+                }}>
+                    <IonIcon icon={createOutline} />
+                </IonButton>
+                <IonButton fill="clear" onClick={() => deleteTodo(todo.id)}>
+                    <IonIcon icon={trashOutline} />
+                </IonButton>
+                </IonItem>
+
+              </IonCol>
+            </IonRow>
+          ))}
         </IonGrid>
       </IonContent>
     </IonPage>
