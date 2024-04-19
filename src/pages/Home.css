@@ -4,12 +4,24 @@
     justify-content: space-between; /* Adjust as per your need */
     padding: 0; /* Optional: Remove default padding */
   }
-
-.circular-button {
-  border-radius: 50%;
-}
-
-/* #profile{
-    width: 20px;
-} */
   
+  .circular-button {
+  border-radius: 50%;
+  }
+  
+  /* #profile{
+    width: 20px;
+  } */
+  
+  /* variables.css */
+  .blue-background {
+  background-color: blue;
+  }
+  
+  /* #card1, #card2, #card3, #card4 {
+    transition: transform 0.3s ease !important;
+  }
+  
+  #card1:hover, #card2:hover, #card3:hover, #card4:hover {
+    transform: scale(1.05) !important;
+  } */
