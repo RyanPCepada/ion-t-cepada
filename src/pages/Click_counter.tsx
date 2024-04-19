@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon, IonBackButton, IonButtons } from '@ionic/react';
 import { addCircleOutline, refreshOutline } from 'ionicons/icons';
 
 const ClickCounter: React.FC = () => {
@@ -20,6 +20,10 @@ const ClickCounter: React.FC = () => {
           <IonTitle>Click Counter</IonTitle>
         </IonToolbar>
       </IonHeader>
+
+        <IonButtons slot="start">
+          <IonBackButton defaultHref="/" />
+        </IonButtons>
 
       <IonContent fullscreen className="ion-padding" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
         <div style={{ marginBottom: '20px' }}>
