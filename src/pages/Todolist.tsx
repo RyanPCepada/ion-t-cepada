@@ -65,8 +65,10 @@ const TodoList: React.FC = () => {
               value={newTodoText}
               onIonChange={(e: any) => setNewTodoText(e.target.value)}
               style={{
-                  width: '350px',
-                  borderBottom: '1px solid gray' // Add white line below the input field
+                fontSize: '25px',
+                width: '300px',
+                marginLeft: '10px',
+                borderBottom: '1px solid gray' // Add white line below the input field
               }}
             />
 
