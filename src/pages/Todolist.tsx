@@ -62,13 +62,18 @@ const TodoList: React.FC = () => {
             <IonCol>
             <IonInput
               placeholder="Enter a task"
+              id="task_inputfield"
               value={newTodoText}
               onIonChange={(e: any) => setNewTodoText(e.target.value)}
               style={{
                 fontSize: '25px',
-                width: '300px',
+                width: '340px',
                 marginLeft: '10px',
-                borderBottom: '1px solid gray' // Add white line below the input field
+                borderBottom: '1px solid gray', // Add white line below the input field
+                backgroundColor: 'rgb(26, 26, 26)',    
+                borderTopLeftRadius: '10px',
+                borderTopRightRadius: '10px',
+                paddingLeft: '20px'
               }}
             />
 
