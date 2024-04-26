@@ -1,0 +1,17 @@
+/* #task_inputfield{
+    font-size: 25px;
+    width: 340px !important;
+    margin-left: 10px;
+    border-bottom: 1px solid gray; /*Add white line below the input field
+} */
+
+.task-inputfield:focus {
+    outline: none;
+    background-color: rgb(36, 36, 36);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .todolist-title{
+    text-align: center;
+  }

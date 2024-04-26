@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonGrid, IonRow, IonCol, IonBackButton, IonButtons, IonList, IonItem, IonLabel, IonCheckbox, IonInput, IonIcon } from '@ionic/react';
+
+import { trashOutline, createOutline, add } from 'ionicons/icons'; // Import the add icon
+
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+const TodoList: React.FC = () => {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [newTodoText, setNewTodoText] = useState<string>('');
+
 import { trashOutline, createOutline } from 'ionicons/icons';
 
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState([]);
   const [newTodoText, setNewTodoText] = useState('');
+
 
   const toggleTodo = (id: number) => {
     setTodos(prevTodos =>
@@ -43,6 +57,70 @@ const TodoList: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
+
+        <IonToolbar className="todolist-title">
+          <IonTitle>Todo List</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonButtons slot="start">
+        <IonBackButton defaultHref="/" />
+      </IonButtons>
+      <IonContent>
+        <IonGrid>
+          <IonRow style={{ marginBottom: '0.5em' }}>
+            <IonCol>
+            <IonInput
+              placeholder="Enter a task"
+              id="task_inputfield"
+              value={newTodoText}
+              onIonChange={(e: any) => setNewTodoText(e.target.value)}
+              style={{
+                fontSize: '25px',
+                width: '340px',
+                marginLeft: '10px',
+                borderBottom: '1px solid gray', // Add white line below the input field
+                backgroundColor: 'rgb(26, 26, 26)',    
+                borderTopLeftRadius: '10px',
+                borderTopRightRadius: '10px',
+                paddingLeft: '20px'
+              }}
+            />
+
+            </IonCol>
+            <IonCol style={{ marginLeft: '0px'}}>
+              <IonIcon icon={add} onClick={addTodo} style={{ fontSize: '35px', borderRadius: '50%', backgroundColor: 'var(--ion-color-primary)' }} />
+            </IonCol>
+          </IonRow>
+          {todos.map(todo => (
+            <IonRow key={todo.id} style={{ margin: '0.1 em 0' }}>
+              <IonCol>
+              <IonItem key={todo.id}>
+                <IonLabel>
+                    <h2 style={{ marginLeft: '30px', textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text}</h2>
+                </IonLabel>
+                <IonCheckbox
+                    slot="start"
+                    checked={todo.completed}
+                    onIonChange={() => toggleTodo(todo.id)}
+                    style={{ width: '20px', position: 'absolute', backgroundColor: 'transparent' }}
+                />
+                <IonButton fill="clear" onClick={() => {
+                    const newText = prompt("Edit todo", todo.text);
+                    if (newText !== null) {
+                    editTodo(todo.id, newText);
+                    }
+                }}>
+                    <IonIcon icon={createOutline} />
+                </IonButton>
+                <IonButton fill="clear" onClick={() => deleteTodo(todo.id)}>
+                    <IonIcon icon={trashOutline} />
+                </IonButton>
+                </IonItem>
+
+              </IonCol>
+            </IonRow>
+          ))}
+
         <IonToolbar>
           <IonTitle>Todo List</IonTitle>
         </IonToolbar>
@@ -88,10 +166,15 @@ const TodoList: React.FC = () => {
               </IonList>
             </IonCol>
           </IonRow>
+
         </IonGrid>
       </IonContent>
     </IonPage>
   );
 };
 
+
 export default TodoList;
+
+export default TodoList;
+
