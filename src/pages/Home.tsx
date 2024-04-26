@@ -39,7 +39,7 @@ const cardData = [
     title: 'Click Counter',
     icon: speedometerOutline,
     subtitle: 'Applet #1',
-    link: '/click_counter'
+    link: '/clickcounter'
   },
   {
     title: 'Calculator',
@@ -57,7 +57,7 @@ const cardData = [
     title: 'Quotes Generator',
     icon: chatbubble,
     subtitle: 'Applet #4',
-    link: '/quotes_generator'
+    link: '/quotesgenerator'
   }
   
 ];
