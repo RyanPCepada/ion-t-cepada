@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {
-  IonBackButton,
-  IonButton,
-  IonButtons,
+  // IonBackButton,
+  // IonButton,
+  // IonButtons,
   IonCard,
-  IonCardContent,
+  // IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
@@ -13,15 +13,15 @@ import {
   IonGrid,
   IonHeader,
   IonIcon,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonList,
+  // IonInput,
+  // IonItem,
+  // IonLabel,
+  // IonList,
   IonPage,
   IonRow,
   IonTitle,
   IonToolbar,
-  IonItemDivider,
+  // IonItemDivider,
   IonSearchbar
 } from '@ionic/react';
 
@@ -33,7 +33,7 @@ import './Home.css';
 import { speedometerOutline,calculator,pencil, chatbubble} from 'ionicons/icons';
 
 //Additional Routes
-import Click_counter from './Click_counter';
+// import Click_counter from './Click_counter';
 
 const cardData = [
   {
@@ -58,7 +58,7 @@ const cardData = [
     title: 'Quotes Generator',
     icon: chatbubble,
     subtitle: 'Applet #4',
-    link: '/quotesgenerator'
+    link: '/quotes_generator'
   }
   
 ];

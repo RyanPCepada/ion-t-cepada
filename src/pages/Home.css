@@ -1,8 +1,10 @@
-.horizontal-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; /* Adjust as per your need */
-  padding: 0; /* Optional: Remove default padding */
+.home-card-title{
+  font-size: 30px;
+}
+
+
+.home-card-icon {
+  font-size: 3rem;
 }
 
 .circular-button {
