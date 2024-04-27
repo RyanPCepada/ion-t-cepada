@@ -70,6 +70,9 @@ const QuotesGenerator: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" />
+          </IonButtons>
           <IonTitle>Quote Generator</IonTitle>
         </IonToolbar>
       </IonHeader>

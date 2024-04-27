@@ -5,3 +5,13 @@
 .home-card-icon {
   font-size: 3rem;
 }
+
+.home-page {
+  background-image: url('../src/assets/img/GALAXY_GIF.gif');
+  background-size: cover;
+  /* Add any additional styling you need */
+}
+
+#card_body{
+  background-color: rgba(0, 0, 0, 0.36);
+}

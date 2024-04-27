@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonGrid, IonRow, IonCol, IonBackButton, IonButtons, IonList, IonItem, IonLabel, IonCheckbox, IonInput, IonIcon } from '@ionic/react';
 import { trashOutline, createOutline, add } from 'ionicons/icons'; // Import the add icon
 
+import './Todolist.css';
+
 interface Todo {
   id: number;
   text: string;
@@ -50,36 +52,39 @@ const Todolist: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="todolist-title">
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" />
+          </IonButtons>
           <IonTitle>Todo List</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonButtons slot="start">
-        <IonBackButton defaultHref="/" />
-      </IonButtons>
       <IonContent>
         <IonGrid>
           <IonRow style={{ marginBottom: '0.5em' }}>
             <IonCol>
-            <IonInput
-              placeholder="Enter a task"
-              id="task_inputfield"
-              value={newTodoText}
-              onIonChange={(e: any) => setNewTodoText(e.target.value)}
-              style={{
-                fontSize: '25px',
-                width: '340px',
-                marginLeft: '10px',
-                borderBottom: '1px solid gray', // Add white line below the input field
-                backgroundColor: 'rgb(26, 26, 26)',    
-                borderTopLeftRadius: '10px',
-                borderTopRightRadius: '10px',
-                paddingLeft: '20px'
-              }}
-            />
+              <IonInput
+                placeholder="Enter a task"
+                id="task_inputfield"
+                value={newTodoText}
+                onIonChange={(e: any) => setNewTodoText(e.target.value)}
+                style={{
+                  fontSize: '25px',
+                  width: '85%',
+                  marginLeft: '10px',
+                  marginRight: '0px',
+                  marginTop: '20px',
+                  borderBottom: '1px solid gray', // Add white line below the input field
+                  backgroundColor: 'rgb(26, 26, 26)',    
+                  // borderTopLeftRadius: '10px',
+                  // borderTopRightRadius: '10px',
+                  paddingLeft: '20px'
+                }}
+              />
 
-            </IonCol>
-            <IonCol style={{ marginLeft: '0px'}}>
-              <IonIcon icon={add} onClick={addTodo} style={{ fontSize: '35px', borderRadius: '50%', backgroundColor: 'var(--ion-color-primary)' }} />
+
+              <IonCol>
+                <IonIcon icon={add} onClick={addTodo} id="icon_plus" style={{ backgroundColor: 'var(--ion-color-primary)' }} />
+              </IonCol>
             </IonCol>
           </IonRow>
           {todos.map(todo => (

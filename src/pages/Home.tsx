@@ -68,7 +68,7 @@ const cardData = [
     const [searchTerm, setSearchTerm] = useState<string>('');
 
     return (
-      <IonPage>
+      <IonPage className="home-page">
         <IonHeader>
           <IonToolbar>
             <IonTitle>Home</IonTitle>
@@ -90,13 +90,13 @@ const cardData = [
           {cardData
             .filter((card) => card.title.toLowerCase().includes(searchTerm.toLowerCase()))
             .map((card, index) => (
-              <IonCard key={index} href={card.link}>
+              <IonCard key={index} href={card.link} id="card_body">
                 <IonCardHeader>
                   <IonCardTitle>
                     <IonGrid>
                       <IonRow>
                         <IonCol push=".75">
-                          <IonIcon className="home-card-icon" icon={card.icon} color="primary" />
+                          <IonIcon className="home-card-icon" icon={card.icon} />
                         </IonCol>
                         <IonCol pull='3'>
                           <div className="home-card-title">{card.title}</div>
