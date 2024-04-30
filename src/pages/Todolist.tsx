@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonGrid, IonRow, IonCol, IonBackButton, IonButtons, IonList, IonItem, IonLabel, IonCheckbox, IonInput, IonIcon } from '@ionic/react';
+
 import { trashOutline, createOutline, add } from 'ionicons/icons'; // Import the add icon
 
 import './Todolist.css';
@@ -13,6 +14,13 @@ interface Todo {
 const Todolist: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodoText, setNewTodoText] = useState<string>('');
+
+import { trashOutline, createOutline } from 'ionicons/icons';
+
+const TodoList: React.FC = () => {
+  const [todos, setTodos] = useState([]);
+  const [newTodoText, setNewTodoText] = useState('');
+
 
   const toggleTodo = (id: number) => {
     setTodos(prevTodos =>
@@ -51,6 +59,7 @@ const Todolist: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
+
         <IonToolbar className="todolist-title">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
@@ -116,6 +125,53 @@ const Todolist: React.FC = () => {
               </IonCol>
             </IonRow>
           ))}
+
+        <IonToolbar>
+          <IonTitle>Todo List</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      
+      <IonButtons slot="start">
+        <IonBackButton defaultHref="/" />
+      </IonButtons>
+      <IonContent fullscreen className="ion-padding" style={{ backgroundColor: '#f0f0f0' }}>
+        <IonGrid>
+          <IonRow className="ion-align-items-center">
+            <IonCol size="12" className="ion-text-center">
+              <h1>Todo List</h1>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="12">
+              <IonInput
+                placeholder="Enter a task"
+                value={newTodoText}
+                onIonChange={(e) => setNewTodoText(e.detail.value!)}
+              />
+              <IonButton expand="block" onClick={addTodo}>Add Task</IonButton>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="12">
+              <IonList>
+                {todos.map(todo => (
+                  <IonItem key={todo.id}>
+                    <IonLabel>{todo.text}</IonLabel>
+                    <div className="ion-text-end">
+                      <IonButton fill="clear" onClick={() => editTodo(todo.id, prompt("Edit task:", todo.text))}>
+                        <IonIcon icon={createOutline} />
+                      </IonButton>
+                      <IonButton fill="clear" onClick={() => deleteTodo(todo.id)}>
+                        <IonIcon icon={trashOutline} />
+                      </IonButton>
+                    </div>
+                    <IonCheckbox slot="start" checked={todo.completed} onIonChange={() => toggleTodo(todo.id)} />
+                  </IonItem>
+                ))}
+              </IonList>
+            </IonCol>
+          </IonRow>
+
         </IonGrid>
       </IonContent>
     </IonPage>
@@ -123,3 +179,4 @@ const Todolist: React.FC = () => {
 };
 
 export default Todolist;
+
