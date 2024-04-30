@@ -28,6 +28,11 @@ import { trashOutline,pencilOutline} from 'ionicons/icons';
 
 import './Todolist.css';
 
+// Firebase
+import { collection, addDoc, onSnapshot,updateDoc,doc, deleteDoc} from 'firebase/firestore';
+import { db } from './Firebase';
+
+
 const Todolist: React.FC = () => {
   const [todos, setTodos] = useState<string[]>([]);
   const [newTodo, setNewTodo] = useState<string>('');
@@ -48,6 +53,20 @@ const Todolist: React.FC = () => {
       setNewTodo('');
     }
   };
+
+  
+  //Read Firebase Data
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'todolist'), (snapshot) => {
+      readNotes(snapshot.docs.map(doc => ({
+        id: doc.id, // Include the id property
+        description: doc.data().description,
+        title: doc.data().title,
+        dateAdded: doc.data().dateAdded
+      })));
+    });
+    return () => unsubscribe();
+  }, []);
 
   
   // Clear the input field
@@ -83,10 +102,10 @@ const Todolist: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonButton slot="start" fill="clear"  href="/ion-t-evangelio/home">
-            Back
-          </IonButton>
-          <IonTitle>To Do List</IonTitle>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" />
+            </IonButtons>
+            <IonTitle>To do list</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
