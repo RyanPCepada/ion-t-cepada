@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {
-  // IonBackButton,
-  // IonButton,
-  // IonButtons,
+  IonBackButton,
+  IonButton,
+  IonButtons,
   IonCard,
-  // IonCardContent,
+  IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
@@ -13,51 +13,81 @@ import {
   IonGrid,
   IonHeader,
   IonIcon,
-  // IonInput,
-  // IonItem,
-  // IonLabel,
-  // IonList,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonList,
   IonPage,
   IonRow,
   IonTitle,
   IonToolbar,
-  // IonItemDivider,
-  IonSearchbar
+  IonItemDivider,
+  IonSearchbar,
+  IonBadge
 } from '@ionic/react';
 
 //Custom CSS
 import './Home.css';
 
 //Ionic Icons
-import { speedometerOutline,calculator,pencil, chatbubble} from 'ionicons/icons';
+import { speedometerOutline,calculator,pencil, chatbubble,logoIonic, logoReact, logoFirebase, readerOutline} from 'ionicons/icons';
 
 //Additional Routes
 // import Click_counter from './Click_counter';
+
 
 const cardData = [
   {
     title: 'Click Counter',
     icon: speedometerOutline,
     subtitle: 'Applet #1',
-    link: '/clickcounter'
+    link: '/clickcounter',
+    tags: {
+      tag1: logoIonic,
+      tag2: logoReact
+    }
+
   },
   {
     title: 'Calculator',
     icon: calculator,
     subtitle: 'Applet #2',
-    link: '/calculator'
+    link: '/calculator',
+    tags: {
+      tag1: logoIonic,
+      tag2: logoReact
+    }
   },
   {
     title: 'To Do List',
     icon: pencil,
     subtitle: 'Applet #3',
-    link: '/todolist'
+    link: '/todolist',
+    tags: {
+      tag1: logoIonic,
+      tag2: logoReact
+    }
   },
   {
-    title: 'Quotes Generator',
+    title: 'Quote Generator',
     icon: chatbubble,
     subtitle: 'Applet #4',
-    link: '/quotesgenerator'
+    link: '/quotegenerator',
+    tags: {
+      tag1: logoIonic,
+      tag2: logoReact
+    }
+  },
+  {
+    title: 'Notes',
+    icon: readerOutline,
+    subtitle: 'Applet #5',
+    link: '/notes',
+    tags: {
+      tag1: logoIonic,
+      tag2: logoReact, 
+      tag3: logoFirebase 
+    }
   }
   
 ];
