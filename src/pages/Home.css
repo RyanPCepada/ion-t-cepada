@@ -7,6 +7,17 @@
   font-size: 3rem;
 }
 
+
+.home-page {
+  background-image: url('../src/assets/img/GALAXY_GIF.gif');
+  background-size: cover;
+  /* Add any additional styling you need */
+}
+
+#card_body{
+  background-color: rgba(0, 0, 0, 0.36);
+}
+
 .circular-button {
 border-radius: 50%;
 }
@@ -26,4 +37,5 @@ background-color: blue;
 
 #card1:hover, #card2:hover, #card3:hover, #card4:hover {
   transform: scale(1.05) !important;
+
 
