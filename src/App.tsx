@@ -62,7 +62,6 @@ const App: React.FC = () => (
             <Notes />
           </Route>
 
-
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
