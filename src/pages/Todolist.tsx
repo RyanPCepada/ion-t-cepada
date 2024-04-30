@@ -51,12 +51,12 @@ const Todolist: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className="todolist-title">
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
-          </IonButtons>
-          <IonTitle>Todo List</IonTitle>
-        </IonToolbar>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" />
+            </IonButtons>
+            <IonTitle>To Do List</IonTitle>
+          </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonGrid>
