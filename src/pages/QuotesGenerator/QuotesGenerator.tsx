@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
+  IonAlert,
   IonBackButton,
   IonButton,
   IonButtons,
@@ -35,13 +36,62 @@ import { collection, addDoc, onSnapshot,updateDoc,doc, deleteDoc} from 'firebase
 import { db } from './Firebase';
 
 const QuotesGenerator: React.FC = () => {
-  const [quotesqenerator, readQuotesGenerator] = useState<{ id: string; title: string; description: string;dateAdded: string; }[]>([]);
+
+  const [quotesgenerator, readQuotesGenerator] = useState<{ id: string; title: string; description: string;dateAdded: string; }[]>([]);
   const [newTitle, setNewTitle] = useState<string>('');
   const [newDescription, setNewDescription] = useState<string>('');
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const inputRefTitle = useRef<HTMLIonInputElement>(null);
   const inputRefDescription = useRef<HTMLIonTextareaElement>(null);
   const [present] = useIonToast();
+
+
+
+
+
+
+
+
+
+  
+  const [showAlert, setShowAlert] = useState(false);
+  const [randomIndex, setRandomIndex] =  useState<number | null>(null); // State to store random index
+
+  // Function to generate a random index
+  const generateRandomIndex = () => {
+    return Math.floor(Math.random() * quotesgenerator.length);
+  };
+
+  // Function to generate a random message
+  const renderRandomMessage = () => {
+    if (randomIndex !== null) {
+      return quotesgenerator[randomIndex].title;
+    } else {
+      return ''; // Return empty string if randomIndex is null
+    }
+  };
+
+ // Function to handle opening of the alert
+ const handleOpenAlert = () => {
+  const newIndex = generateRandomIndex();
+  setRandomIndex(newIndex);
+  setShowAlert(true);
+};
+
+// Function to handle closing of the alert
+const handleAlertDismiss = () => {
+  setRandomIndex(0); // Reset the index to 0
+  setShowAlert(false); // Hide the alert
+};
+
+
+
+
+
+
+
+
+
 
   // Clear the input field
   const clearInput = () => {
@@ -85,7 +135,7 @@ const QuotesGenerator: React.FC = () => {
       } else {
         const currentDate = new Date().toISOString(); 
         addQuoteToast('middle');
-        await addDoc(collection(db, 'quotesqenerator'), {
+        await addDoc(collection(db, 'quotesgenerator'), {
           title: newTitle,
           description: newDescription,
           dateAdded: currentDate
@@ -98,7 +148,7 @@ const QuotesGenerator: React.FC = () => {
 
   //Read Firebase Data
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'quotesqenerator'), (snapshot) => {
+    const unsubscribe = onSnapshot(collection(db, 'quotesgenerator'), (snapshot) => {
       readQuotesGenerator(snapshot.docs.map(doc => ({
         id: doc.id, // Include the id property
         description: doc.data().description,
@@ -112,7 +162,7 @@ const QuotesGenerator: React.FC = () => {
 // Edit Handler
 const editQuote = (index: number) => {
   setEditIndex(index);
-  const editedQuote = quotesqenerator[index];
+  const editedQuote = quotesgenerator[index];
   setNewTitle(editedQuote.title);
   setNewDescription(editedQuote.description);
 };
@@ -121,8 +171,8 @@ const editQuote = (index: number) => {
 const updateQuote = async () => {
   if (editIndex !== null) {
     editQuoteToast('middle');
-    const quoteToUpdate = quotesqenerator[editIndex];
-    await updateDoc(doc(db, 'quotesqenerator', quoteToUpdate.id), {
+    const quoteToUpdate = quotesgenerator[editIndex];
+    await updateDoc(doc(db, 'quotesgenerator', quoteToUpdate.id), {
       title: newTitle,
       description: newDescription,
     });
@@ -141,9 +191,9 @@ const cancelEdit = () => {
 // Delete Firebase Data
 const deleteQuote = async (index: number) => {
   deleteQuoteToast('middle');
-  const quoteToDelete = quotesqenerator[index];
+  const quoteToDelete = quotesgenerator[index];
   // Delete quote from Firestore
-  await deleteDoc(doc(db, 'quotesqenerator', quoteToDelete.id));
+  await deleteDoc(doc(db, 'quotesgenerator', quoteToDelete.id));
 };
 
   return (
@@ -166,7 +216,7 @@ const deleteQuote = async (index: number) => {
                 id="custom-input"
                 labelPlacement="floating"
                 counter={true}
-                maxlength={50}
+                maxlength={200}
                 counterFormatter={(inputLength, maxLength) => `${maxLength - inputLength} / ${maxLength} characters remaining`}
                 value={newTitle}
                 onIonInput={(e) => setNewTitle(e.detail.value!)}
@@ -203,14 +253,32 @@ const deleteQuote = async (index: number) => {
             </IonRow>      
           </IonCardContent>
         </IonCard>
+
+
+
+        <IonRow>
+          <IonCol size="" push="">
+            <IonButton id="present-alert" color="primary" expand="full" onClick={handleOpenAlert}>Click me</IonButton> 
+            <IonAlert
+              isOpen={showAlert}
+              onDidDismiss={handleAlertDismiss} // Call the handleAlertDismiss function when the alert is closed
+              header="ArysArts"
+              subHeader=""
+              message={renderRandomMessage()}
+              buttons={['Close']}
+            />
+          </IonCol>
+        </IonRow>
+
+
         {/*Todo list output*/}
         <br></br>
         <IonItemDivider color="light">
           <IonLabel style={{color: 'white'}}>Quotes you have saved</IonLabel>
         </IonItemDivider>
         <IonList id="list_body">
-          {quotesqenerator
-            .slice() // Create a shallow copy of the quotesqenerator array to avoid mutating the original array
+          {quotesgenerator
+            .slice() // Create a shallow copy of the quotesgenerator array to avoid mutating the original array
             .sort((a, b) => new Date(a.dateAdded).getTime() - new Date(b.dateAdded).getTime()) // Sort the array by dateAdded
             .map((quote, index) => (
             <IonItem key={index}>
