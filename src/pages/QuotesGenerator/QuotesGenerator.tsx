@@ -53,7 +53,8 @@ const QuotesGenerator: React.FC = () => {
 
 
 
-  
+  //THIS IS FROM THE OLD CODE//
+
   const [showAlert, setShowAlert] = useState(false);
   const [randomIndex, setRandomIndex] =  useState<number | null>(null); // State to store random index
 
@@ -83,6 +84,8 @@ const handleAlertDismiss = () => {
   setRandomIndex(0); // Reset the index to 0
   setShowAlert(false); // Hide the alert
 };
+
+  //THIS IS FROM THE OLD CODE//
 
 
 
@@ -266,6 +269,7 @@ const deleteQuote = async (index: number) => {
               subHeader=""
               message={renderRandomMessage()}
               buttons={['Close']}
+              id="alert_quote"
             />
           </IonCol>
         </IonRow>
