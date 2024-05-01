@@ -19,160 +19,235 @@ import {
   IonList,
   IonPage,
   IonRow,
+  IonTextarea,
   IonTitle,
   IonToolbar,
-  IonItemDivider
+  IonItemDivider,
+  useIonToast
 } from '@ionic/react';
 //Ionicons
-import { trashOutline,pencilOutline} from 'ionicons/icons';
+import { trashOutline, pencilOutline, checkmarkOutline } from 'ionicons/icons';
 
 import './Todolist.css';
 
 // Firebase
-import { collection, addDoc, onSnapshot,updateDoc,doc, deleteDoc} from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { db } from './Firebase';
 
-
-const Todolist: React.FC = () => {
-  const [todos, setTodos] = useState<string[]>([]);
-  const [newTodo, setNewTodo] = useState<string>('');
+const TodoList: React.FC = () => {
+  const [todolist, setTodos] = useState<{ id: string; title: string; description: string; dateAdded: string; completed: boolean }[]>([]);
+  const [newTitle, setNewTitle] = useState<string>('');
+  const [newDescription, setNewDescription] = useState<string>('');
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const inputRef = useRef<HTMLIonInputElement>(null);
+  const inputRefTitle = useRef<HTMLIonInputElement>(null);
+  const inputRefDescription = useRef<HTMLIonTextareaElement>(null);
+  const [present] = useIonToast();
 
-  // Add a new to-do when the "Add" button is clicked
-  const addTodo = () => {
-    if (newTodo.trim() !== '') {
-      if (editIndex !== null) {
-        const newTodos = [...todos];
-        newTodos[editIndex] = newTodo;
-        setTodos(newTodos);
-        setEditIndex(null);
-      } else {
-        setTodos([...todos, newTodo]);
-      }
-      setNewTodo('');
+  // Clear the input field
+  const clearInput = () => {
+    setNewTitle('');
+    setNewDescription('');
+    if (inputRefTitle.current && inputRefDescription.current) {
+      inputRefTitle.current.setFocus();
     }
   };
 
-  
+  // Toast
+  const addTodoToast = (position: 'middle') => {
+    present({
+      message: 'Added new Todo',
+      duration: 1500,
+      position: position,
+    });
+  };
+
+  const editTodoToast = (position: 'middle') => {
+    present({
+      message: 'Changes Saved',
+      duration: 1500,
+      position: position,
+    });
+  };
+
+  const deleteTodoToast = (position: 'middle') => {
+    present({
+      message: 'Todo deleted',
+      duration: 1500,
+      position: position,
+    });
+  };
+
+  //Create Todo
+  const addTodo = async () => {
+    if (newTitle.trim() !== '') {
+      if (editIndex !== null) {
+        // Update existing todo (not implemented in this code snippet)
+      } else {
+        const currentDate = new Date().toISOString();
+        addTodoToast('middle');
+        await addDoc(collection(db, 'todolist'), {
+          title: newTitle,
+          description: newDescription,
+          dateAdded: currentDate,
+          completed: false
+        });
+
+      }
+      clearInput();
+    }
+  };
+
   //Read Firebase Data
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'todolist'), (snapshot) => {
-      readNotes(snapshot.docs.map(doc => ({
+      setTodos(snapshot.docs.map(doc => ({
         id: doc.id, // Include the id property
         description: doc.data().description,
         title: doc.data().title,
-        dateAdded: doc.data().dateAdded
+        dateAdded: doc.data().dateAdded,
+        completed: doc.data().completed
       })));
     });
     return () => unsubscribe();
   }, []);
 
-  
-  // Clear the input field
-  const clearInput = () => {
-    setNewTodo('');
-    if (inputRef.current) {
-      inputRef.current.setFocus();
-    }
-  };
-
-  // Remove a to-do when the delete button is clicked
-  const removeTodo = (index: number) => {
-    setTodos(todos.filter((_, i) => i !== index));
-  };
-
-  // Set the input field for editing when a todo item is clicked
+  // Edit Handler
   const editTodo = (index: number) => {
-    setNewTodo(todos[index]);
     setEditIndex(index);
-    if (inputRef.current) {
-      inputRef.current.setFocus();
+    const editedTodo = todolist[index];
+    setNewTitle(editedTodo.title);
+    setNewDescription(editedTodo.description);
+  };
+
+  // Update Firebase Data
+  const updateTodo = async () => {
+    if (editIndex !== null) {
+      editTodoToast('middle');
+      const todoToUpdate = todolist[editIndex];
+      await updateDoc(doc(db, 'todolist', todoToUpdate.id), {
+        title: newTitle,
+        description: newDescription,
+      });
+      // Clear the input fields and reset editIndex
+      clearInput();
+      setEditIndex(null);
     }
   };
 
-  // Focus on the new to-do input when the component mounts or after editing
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [editIndex]);
+  // Cancel Edit function
+  const cancelEdit = () => {
+    clearInput(); // Clear input fields
+    setEditIndex(null); // Reset editIndex
+  };
+
+  // Delete Firebase Data
+  const deleteTodo = async (index: number) => {
+    deleteTodoToast('middle');
+    const todoToDelete = todolist[index];
+    // Delete todo from Firestore
+    await deleteDoc(doc(db, 'todolist', todoToDelete.id));
+  };
+
+  // Toggle Completion
+  const toggleCompletion = async (index: number) => {
+    const updatedTodos = [...todolist];
+    updatedTodos[index].completed = !updatedTodos[index].completed;
+    setTodos(updatedTodos);
+
+    // Update completion status in Firestore
+    await updateDoc(doc(db, 'todolist', todolist[index].id), {
+      completed: updatedTodos[index].completed
+    });
+  };
 
   return (
-    <IonPage>
+    <IonPage className="home-page">
       <IonHeader>
         <IonToolbar>
-            <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
-            </IonButtons>
-            <IonTitle>To do list</IonTitle>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" />
+          </IonButtons>
+          <IonTitle>Todos</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <img className="todolist-img-header" alt="Silhouette of mountains" src="https://www.teamly.com/blog/wp-content/uploads/2021/12/Master-Task-List.png" />
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-
-             {/*Todo list output*/}
-             <IonInput
-                  className='todolist-form'
-                  id="custom-input"
-                  label="Type something here"
-                  labelPlacement="floating"
-                  counter={true}
-                  maxlength={200}
-                  counterFormatter={(inputLength, maxLength) => `${maxLength - inputLength} / ${maxLength} characters remaining`}
-                  value={newTodo}
-                  onIonInput={(e) => setNewTodo(e.detail.value!)}
-                  ref={inputRef}
+        <IonCard id="card_body">
+          <IonCardHeader>
+            <IonCardTitle>
+              <IonInput
+                placeholder="Type your task here"
+                label="Add a task..."
+                id="custom-input"
+                labelPlacement="floating"
+                counter={true}
+                maxlength={50}
+                counterFormatter={(inputLength, maxLength) => `${maxLength - inputLength} / ${maxLength} characters remaining`}
+                value={newTitle}
+                onIonInput={(e) => setNewTitle(e.detail.value!)}
+                ref={inputRefTitle}
               ></IonInput>
-              <IonRow>
-                  <IonCol>
-                  <IonButton expand="block" onClick={addTodo} > {editIndex !== null ? 'Update' : 'Add'}</IonButton>
-                  </IonCol>
-                  <IonCol> 
-                  <IonButton  expand="block"fill="clear"  onClick={clearInput} >Clear</IonButton>
-                  </IonCol>      
-              </IonRow>    
-
-              {/*Todo list output*/}
-              <br></br>
-              <IonItemDivider color="light">
-                <IonLabel>The stuff you need to do</IonLabel>
-              </IonItemDivider>
-              <IonList>
-                    {todos.map((todo, index) => (
-                      <IonItem className="todolist-result" key={index}>
-                        <IonInput
-                          disabled={editIndex !== index}
-                          value={todo}
-                          onIonChange={(e) => setNewTodo(e.detail.value!)}
-                        ></IonInput>
-                        {editIndex === index ? (
-                          <IonButton onClick={() => addTodo()}>
-                            Done
-                          </IonButton>
-                        ) : (
-                          <>
-                            <IonButton onClick={() => editTodo(index)}>
-                              <IonIcon icon={pencilOutline} />
-                            </IonButton>
-                            <IonButton onClick={() => removeTodo(index)}>
-                              <IonIcon icon={trashOutline} />
-                            </IonButton>
-                          </>
-                        )}
-                      </IonItem>
-                    ))}
-              </IonList>
-            
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+            </IonCardTitle>
+            <IonCardSubtitle>
+              <IonTextarea
+                placeholder="Type task description here"
+                label="Description"
+                id="custom-input"
+                labelPlacement="floating"
+                counter={true}
+                maxlength={200}
+                counterFormatter={(inputLength, maxLength) => `${maxLength - inputLength} / ${maxLength} characters remaining`}
+                value={newDescription}
+                onIonInput={(e) => setNewDescription(e.detail.value!)}
+                ref={inputRefDescription}
+              ></IonTextarea>
+            </IonCardSubtitle>
+          </IonCardHeader>
+          <IonCardContent>
+            <IonRow>
+              <IonCol>
+                <IonButton expand="block" onClick={editIndex !== null ? updateTodo : addTodo}>
+                  {editIndex !== null ? 'Update' : 'Add'}
+                </IonButton>
+              </IonCol>
+              <IonCol>
+                <IonButton expand="block" fill="clear" onClick={editIndex !== null ? cancelEdit : clearInput}>
+                  {editIndex !== null ? 'Cancel' : 'Clear'}
+                </IonButton>
+              </IonCol>
+            </IonRow>
+          </IonCardContent>
+        </IonCard>
+        {/*Todo list output*/}
+        <br></br>
+        <IonItemDivider color="light">
+          <IonLabel>Stuffs you need to do</IonLabel>
+        </IonItemDivider>
+        <IonList id="list_body">
+          {todolist
+            .slice() // Create a shallow copy of the todolist array to avoid mutating the original array
+            .sort((a, b) => new Date(a.dateAdded).getTime() - new Date(b.dateAdded).getTime()) // Sort the array by dateAdded
+            .map((todo, index) => (
+              <IonItem key={index}>
+                <IonLabel onClick={() => toggleCompletion(index)} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+                  <h2>{todo.title}</h2>
+                  <p>{todo.description}</p>
+                  <p>{new Date(todo.dateAdded).toLocaleString()}</p>
+                </IonLabel>
+                <IonButton fill="clear" onClick={() => editTodo(index)}>
+                  
+                  <IonIcon icon={pencilOutline} />
+                Edit
+              </IonButton>
+              <IonButton fill="clear" onClick={() => deleteTodo(index)}>
+                <IonIcon icon={trashOutline} />
+                Delete
+              </IonButton>
+            </IonItem>
+          ))}
+        </IonList>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Todolist;
+export default TodoList;

@@ -147,7 +147,7 @@ const deleteNote = async (index: number) => {
 };
 
   return (
-    <IonPage>
+    <IonPage className="home-page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -157,12 +157,12 @@ const deleteNote = async (index: number) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonCard>
+        <IonCard id="card_body">
           <IonCardHeader>
             <IonCardTitle>
               <IonInput
-                placeholder="Type something here"
-                label="Title"
+                placeholder="Type your note here"
+                label="Add a note..."
                 id="custom-input"
                 labelPlacement="floating"
                 counter={true}
@@ -175,7 +175,7 @@ const deleteNote = async (index: number) => {
             </IonCardTitle>
             <IonCardSubtitle>
               <IonTextarea 
-                placeholder="Type something here"
+                placeholder="Type note description here"
                 label="Description"
                 id="custom-input"
                 labelPlacement="floating"
@@ -206,9 +206,9 @@ const deleteNote = async (index: number) => {
         {/*Todo list output*/}
         <br></br>
         <IonItemDivider color="light">
-          <IonLabel>Notes</IonLabel>
+          <IonLabel style={{color: 'white'}}>Notes you have taken</IonLabel>
         </IonItemDivider>
-        <IonList>
+        <IonList id="list_body">
           {notes
             .slice() // Create a shallow copy of the notes array to avoid mutating the original array
             .sort((a, b) => new Date(a.dateAdded).getTime() - new Date(b.dateAdded).getTime()) // Sort the array by dateAdded
