@@ -27,15 +27,18 @@
 
 
 
+
 /* Target the inner content of the IonAlert */
 ion-alert#alert_quote .alert-wrapper {
-    background-color: rgb(7, 5, 46) !important; /* Set the background color for the inner box */
+    background-color: rgb(9, 6, 51) !important; /* Set the background color for the inner box */
+    border-radius: 10px;
   }
   
   
   
   ion-alert#alert_quote .alert-message {
     background-color: rgb(12, 9, 63) !important; /* Set the background color for the inner box */
+    /* background-color: linear-gradient(135deg, rgb(12, 9, 63), rgb(27, 21, 133), rgb(12, 9, 63)) !important; */
     color: rgb(255, 255, 255); /* Set text color for the message */
     padding: 20px;
   }
