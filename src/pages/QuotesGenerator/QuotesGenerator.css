@@ -7,21 +7,36 @@
   #card_body, #head_body, #list_body{
     background-color: rgba(0, 0, 0, 0.736) !important;
   }
-  #alert_quote {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centers horizontally */
-    align-items: flex-start; /* Aligns content to the top */
-    width: 70%;
-    max-height: 30vh; /* Set a maximum height to prevent it from taking up the entire screen */
+
+
+  /* #alert_quote {
+    width: 100%;
+    height: 100%;
+    padding: 70px;
     border-radius: 15px;
-    background-color: black;
-    overflow-y: auto; /* Enable vertical scrolling if needed */
+    background-color: rgb(12, 9, 63);
 
 
     margin-left: 15%;
     margin-top: 50%;
+  } */
+
+
+
+
+
+
+
+/* Target the inner content of the IonAlert */
+ion-alert#alert_quote .alert-wrapper {
+    background-color: rgb(7, 5, 46) !important; /* Set the background color for the inner box */
   }
   
   
+  
+  ion-alert#alert_quote .alert-message {
+    background-color: rgb(12, 9, 63) !important; /* Set the background color for the inner box */
+    color: rgb(255, 255, 255); /* Set text color for the message */
+    padding: 20px;
+  }
   

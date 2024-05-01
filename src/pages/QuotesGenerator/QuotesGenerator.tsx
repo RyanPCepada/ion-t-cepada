@@ -265,7 +265,7 @@ const deleteQuote = async (index: number) => {
             <IonAlert
               isOpen={showAlert}
               onDidDismiss={handleAlertDismiss} // Call the handleAlertDismiss function when the alert is closed
-              header="ArysArts"
+              header="ArsyArts"
               subHeader=""
               message={renderRandomMessage()}
               buttons={['Close']}
