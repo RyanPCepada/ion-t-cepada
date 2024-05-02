@@ -8,33 +8,11 @@
     background-color: rgba(0, 0, 0, 0.736) !important;
   }
 
-
-  /* #alert_quote {
-    width: 100%;
-    height: 100%;
-    padding: 70px;
-    border-radius: 15px;
-    background-color: rgb(12, 9, 63);
-
-
-    margin-left: 15%;
-    margin-top: 50%;
-  } */
-
-
-
-
-
-
-
-
 /* Target the inner content of the IonAlert */
 ion-alert#alert_quote .alert-wrapper {
     background-color: rgb(9, 6, 51) !important; /* Set the background color for the inner box */
     border-radius: 10px;
   }
-  
-  
   
   ion-alert#alert_quote .alert-message {
     background-color: rgb(12, 9, 63) !important; /* Set the background color for the inner box */
