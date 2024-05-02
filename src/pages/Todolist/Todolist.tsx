@@ -167,7 +167,7 @@ const TodoList: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
-          <IonTitle>Todo</IonTitle>
+          <IonTitle>To Do List</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
