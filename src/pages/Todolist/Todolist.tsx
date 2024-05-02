@@ -19,23 +19,23 @@ import {
   IonList,
   IonPage,
   IonRow,
+  IonTextarea,
   IonTitle,
   IonToolbar,
   IonItemDivider,
-  IonTextarea,
   useIonToast
 } from '@ionic/react';
 //Ionicons
-import { trashOutline, pencilOutline } from 'ionicons/icons';
+import { trashOutline, pencilOutline, checkmarkOutline } from 'ionicons/icons';
 
-import './Notes.css';
+import './Todolist.css';
 
 // Firebase
-import { collection, addDoc, onSnapshot,updateDoc,doc, deleteDoc} from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { db } from './Firebase';
 
-const Notes: React.FC = () => {
-  const [notes, readNotes] = useState<{ id: string; title: string; description: string;dateAdded: string; }[]>([]);
+const TodoList: React.FC = () => {
+  const [todolist, setTodos] = useState<{ id: string; title: string; description: string; dateAdded: string; completed: boolean }[]>([]);
   const [newTitle, setNewTitle] = useState<string>('');
   const [newDescription, setNewDescription] = useState<string>('');
   const [editIndex, setEditIndex] = useState<number | null>(null);
@@ -53,15 +53,15 @@ const Notes: React.FC = () => {
   };
 
   // Toast
-  const addNoteToast = (position: 'middle') => {
+  const addTodoToast = (position: 'middle') => {
     present({
-      message: 'Added new Note',
+      message: 'Added new Todo',
       duration: 1500,
       position: position,
     });
   };
 
-  const editNoteToast = (position: 'middle') => {
+  const editTodoToast = (position: 'middle') => {
     present({
       message: 'Changes Saved',
       duration: 1500,
@@ -69,28 +69,29 @@ const Notes: React.FC = () => {
     });
   };
 
-  const deleteNoteToast = (position: 'middle') => {
+  const deleteTodoToast = (position: 'middle') => {
     present({
-      message: 'Note deleted',
+      message: 'Todo deleted',
       duration: 1500,
       position: position,
     });
   };
 
-  //Create Note
-  const addNote = async () => {
+  //Create Todo
+  const addTodo = async () => {
     if (newTitle.trim() !== '') {
       if (editIndex !== null) {
-        // Update existing note (not implemented in this code snippet)
+        // Update existing todo (not implemented in this code snippet)
       } else {
-        const currentDate = new Date().toISOString(); 
-        addNoteToast('middle');
-        await addDoc(collection(db, 'notes'), {
+        const currentDate = new Date().toISOString();
+        addTodoToast('middle');
+        await addDoc(collection(db, 'todolist'), {
           title: newTitle,
           description: newDescription,
-          dateAdded: currentDate
+          dateAdded: currentDate,
+          completed: false
         });
-        
+
       }
       clearInput();
     }
@@ -98,53 +99,66 @@ const Notes: React.FC = () => {
 
   //Read Firebase Data
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'notes'), (snapshot) => {
-      readNotes(snapshot.docs.map(doc => ({
+    const unsubscribe = onSnapshot(collection(db, 'todolist'), (snapshot) => {
+      setTodos(snapshot.docs.map(doc => ({
         id: doc.id, // Include the id property
         description: doc.data().description,
         title: doc.data().title,
-        dateAdded: doc.data().dateAdded
+        dateAdded: doc.data().dateAdded,
+        completed: doc.data().completed
       })));
     });
     return () => unsubscribe();
   }, []);
 
-// Edit Handler
-const editNote = (index: number) => {
-  setEditIndex(index);
-  const editedNote = notes[index];
-  setNewTitle(editedNote.title);
-  setNewDescription(editedNote.description);
-};
+  // Edit Handler
+  const editTodo = (index: number) => {
+    setEditIndex(index);
+    const editedTodo = todolist[index];
+    setNewTitle(editedTodo.title);
+    setNewDescription(editedTodo.description);
+  };
 
-// Update Firebase Data
-const updateNote = async () => {
-  if (editIndex !== null) {
-    editNoteToast('middle');
-    const noteToUpdate = notes[editIndex];
-    await updateDoc(doc(db, 'notes', noteToUpdate.id), {
-      title: newTitle,
-      description: newDescription,
+  // Update Firebase Data
+  const updateTodo = async () => {
+    if (editIndex !== null) {
+      editTodoToast('middle');
+      const todoToUpdate = todolist[editIndex];
+      await updateDoc(doc(db, 'todolist', todoToUpdate.id), {
+        title: newTitle,
+        description: newDescription,
+      });
+      // Clear the input fields and reset editIndex
+      clearInput();
+      setEditIndex(null);
+    }
+  };
+
+  // Cancel Edit function
+  const cancelEdit = () => {
+    clearInput(); // Clear input fields
+    setEditIndex(null); // Reset editIndex
+  };
+
+  // Delete Firebase Data
+  const deleteTodo = async (index: number) => {
+    deleteTodoToast('middle');
+    const todoToDelete = todolist[index];
+    // Delete todo from Firestore
+    await deleteDoc(doc(db, 'todolist', todoToDelete.id));
+  };
+
+  // Toggle Completion
+  const toggleCompletion = async (index: number) => {
+    const updatedTodos = [...todolist];
+    updatedTodos[index].completed = !updatedTodos[index].completed;
+    setTodos(updatedTodos);
+
+    // Update completion status in Firestore
+    await updateDoc(doc(db, 'todolist', todolist[index].id), {
+      completed: updatedTodos[index].completed
     });
-    // Clear the input fields and reset editIndex
-    clearInput();
-    setEditIndex(null);
-  }
-};
-
-//Cancel Edit function
-const cancelEdit = () => {
-  clearInput(); // Clear input fields
-  setEditIndex(null); // Reset editIndex
-};
-
-// Delete Firebase Data
-const deleteNote = async (index: number) => {
-  deleteNoteToast('middle');
-  const noteToDelete = notes[index];
-  // Delete note from Firestore
-  await deleteDoc(doc(db, 'notes', noteToDelete.id));
-};
+  };
 
   return (
     <IonPage className="home-page">
@@ -153,7 +167,7 @@ const deleteNote = async (index: number) => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
-          <IonTitle>Notes</IonTitle>
+          <IonTitle>Todo</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
@@ -161,8 +175,8 @@ const deleteNote = async (index: number) => {
           <IonCardHeader>
             <IonCardTitle>
               <IonInput
-                placeholder="Type your note here"
-                label="Add a note..."
+                placeholder="Type your task here"
+                label="Add a task..."
                 id="custom-input"
                 labelPlacement="floating"
                 counter={true}
@@ -174,8 +188,8 @@ const deleteNote = async (index: number) => {
               ></IonInput>
             </IonCardTitle>
             <IonCardSubtitle>
-              <IonTextarea 
-                placeholder="Type note description here"
+              <IonTextarea
+                placeholder="Type task description here"
                 label="Description"
                 id="custom-input"
                 labelPlacement="floating"
@@ -191,46 +205,49 @@ const deleteNote = async (index: number) => {
           <IonCardContent>
             <IonRow>
               <IonCol>
-                <IonButton expand="block" onClick={editIndex !== null ? updateNote : addNote}>
+                <IonButton expand="block" onClick={editIndex !== null ? updateTodo : addTodo}>
                   {editIndex !== null ? 'Update' : 'Add'}
                 </IonButton>
               </IonCol>
-              <IonCol> 
+              <IonCol>
                 <IonButton expand="block" fill="clear" onClick={editIndex !== null ? cancelEdit : clearInput}>
                   {editIndex !== null ? 'Cancel' : 'Clear'}
                 </IonButton>
               </IonCol>
-            </IonRow>      
+            </IonRow>
           </IonCardContent>
         </IonCard>
         {/*Todo list output*/}
         <br></br>
         <IonItemDivider color="light">
-          <IonLabel style={{color: 'white'}}>Notes you have taken</IonLabel>
+          <IonLabel>Stuffs you need to do</IonLabel>
         </IonItemDivider>
         <IonList id="list_body">
-          {notes
-            .slice() // Create a shallow copy of the notes array to avoid mutating the original array
+          {todolist
+            .slice() // Create a shallow copy of the todolist array to avoid mutating the original array
             .sort((a, b) => new Date(a.dateAdded).getTime() - new Date(b.dateAdded).getTime()) // Sort the array by dateAdded
-            .map((note, index) => (
-            <IonItem key={index}>
-              <IonLabel>
-                <h2>{note.title}</h2>
-                <p>{note.description}</p>
-                <p>{new Date(note.dateAdded).toLocaleString()}</p>
-              </IonLabel>
-              <IonButton fill="clear" onClick={() => editNote(index)}>
-                <IonIcon icon={pencilOutline} />
+            .map((todo, index) => (
+              <IonItem key={index}>
+                <IonLabel onClick={() => toggleCompletion(index)} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+                  <h2>{todo.title}</h2>
+                  <p>{todo.description}</p>
+                  <p>{new Date(todo.dateAdded).toLocaleString()}</p>
+                </IonLabel>
+                <IonButton fill="clear" onClick={() => editTodo(index)}>
+                  
+                  <IonIcon icon={pencilOutline} />
+                Edit
               </IonButton>
-              <IonButton fill="clear" onClick={() => deleteNote(index)}>
+              <IonButton fill="clear" onClick={() => deleteTodo(index)}>
                 <IonIcon icon={trashOutline} />
+                Delete
               </IonButton>
             </IonItem>
           ))}
-        </IonList> 
+        </IonList>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Notes;
+export default TodoList;

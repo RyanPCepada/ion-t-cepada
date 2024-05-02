@@ -1,0 +1,23 @@
+.home-page {
+    background-image: url('../src/assets/img/GALAXY_GIF.gif');
+    background-size: cover;
+    /* Add any additional styling you need */
+  }
+  
+  #card_body, #head_body, #list_body{
+    background-color: rgba(0, 0, 0, 0.736) !important;
+  }
+
+/* Target the inner content of the IonAlert */
+ion-alert#alert_quote .alert-wrapper {
+    background-color: rgb(9, 6, 51) !important; /* Set the background color for the inner box */
+    border-radius: 10px;
+  }
+  
+  ion-alert#alert_quote .alert-message {
+    background-color: rgb(12, 9, 63) !important; /* Set the background color for the inner box */
+    /* background-color: linear-gradient(135deg, rgb(12, 9, 63), rgb(27, 21, 133), rgb(12, 9, 63)) !important; */
+    color: rgb(255, 255, 255); /* Set text color for the message */
+    padding: 20px;
+  }
+  

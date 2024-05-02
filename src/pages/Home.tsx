@@ -70,7 +70,7 @@ const cardData = [
     }
   },
   {
-    title: 'Quote Generator',
+    title: 'Quotes Generator',
     icon: chatbubble,
     subtitle: 'Applet #4',
     link: '/quotesgenerator',
