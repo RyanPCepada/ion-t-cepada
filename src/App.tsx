@@ -46,7 +46,7 @@ const App: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
           
-          <Route exact path="/clickcounter">
+          <Route exact path="/ion-t-cepada/clickcounter">
             <ClickCounter />
           </Route>
           <Route exact path="/calculator">
