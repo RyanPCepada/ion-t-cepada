@@ -62,20 +62,20 @@ const App: React.FC = () => (
             <Notes />
           </Route>
 
-          <Route exact path="/">
-            <Redirect to="/home" />
+          <Route exact path="/ion-t-cepada/">
+            <Redirect to="/ion-t-cepada/home" />
           </Route>
-          <Route exact path="/home">
+          <Route exact path="/ion-t-cepada/home">
             <Home />
           </Route>
-          <Route exact path="/profile">
+          <Route exact path="/ion-t-cepada/profile">
             <Profile />
           </Route>
 
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
 
-          <IonTabButton tab="home" href="/home">
+          <IonTabButton tab="home" href="/ion-t-cepada/home">
             <IonIcon aria-hidden="true" icon={home} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
@@ -95,11 +95,11 @@ const App: React.FC = () => (
           </IonTabButton>
           */}
 
-          <IonTabButton tab="" href="">
+          <IonTabButton tab="" href="/ion-t-cepada/">
             <IonIcon aria-hidden="true" />
             <IonLabel></IonLabel>
           </IonTabButton>
-          <IonTabButton tab="profile" href="/profile">
+          <IonTabButton tab="profile" href="/ion-t-cepada/profile">
             <IonIcon aria-hidden="true" icon={personCircleOutline} />
             <IonLabel>Profile</IonLabel>
           </IonTabButton>
