@@ -49,16 +49,16 @@ const App: React.FC = () => (
           <Route exact path="/ion-t-cepada/clickcounter">
             <ClickCounter />
           </Route>
-          <Route exact path="/calculator">
+          <Route exact path="/ion-t-cepada/calculator">
             <Calculator />
           </Route>
-          <Route exact path="/todolist">
+          <Route exact path="/ion-t-cepada/todolist">
             <Todolist />
           </Route>
-          <Route exact path="/quotesgenerator">
+          <Route exact path="/ion-t-cepada/quotesgenerator">
             <QuotesGenerator />
           </Route>
-          <Route exact path="/notes">
+          <Route exact path="/ion-t-cepada/notes">
             <Notes />
           </Route>
 
