@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/ion-t-cepada/",
+  base: "ion-t-cepada/",
   plugins: [
     react(),
     legacy()
