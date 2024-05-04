@@ -41,7 +41,7 @@ const cardData = [
     title: 'Click Counter',
     icon: speedometerOutline,
     subtitle: 'Applet #1',
-    link: '/ion-t-cepada/clickcounter',
+    link: '/ion-t-cepada/home/clickcounter',
     tags: {
       tag1: logoIonic,
       tag2: logoReact
@@ -52,7 +52,7 @@ const cardData = [
     title: 'Calculator',
     icon: calculator,
     subtitle: 'Applet #2',
-    link: '/ion-t-cepada/calculator',
+    link: '/ion-t-cepada/home/calculator',
     tags: {
       tag1: logoIonic,
       tag2: logoReact
@@ -62,7 +62,7 @@ const cardData = [
     title: 'To Do List',
     icon: pencil,
     subtitle: 'Applet #3',
-    link: '/ion-t-cepada/todolist',
+    link: '/ion-t-cepada/home/todolist',
     tags: {
       tag1: logoIonic,
       tag2: logoReact
@@ -72,7 +72,7 @@ const cardData = [
     title: 'Quote Generator',
     icon: chatbubble,
     subtitle: 'Applet #4',
-    link: '/ion-t-cepada/quotesgenerator',
+    link: '/ion-t-cepada/home/quotesgenerator',
     tags: {
       tag1: logoIonic,
       tag2: logoReact
@@ -82,7 +82,7 @@ const cardData = [
     title: 'Notes',
     icon: readerOutline,
     subtitle: 'Applet #5',
-    link: '/ion-t-cepada/notes',
+    link: '/ion-t-cepada/home/notes',
     tags: {
       tag1: logoIonic,
       tag2: logoReact, 
