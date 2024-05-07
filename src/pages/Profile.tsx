@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
 
       <IonRow>
         <IonCol size="4">
-          <img alt="Profile" id="profile_pic" src="../src/assets/img/ARSY_CIRCLE_GREEN_PNG.png" className="profile-pic-animation" />
+          <img alt="Profile" id="profile_pic" src="https://raw.githubusercontent.com/RyanPCepada/ion-t-cepada/main/src/assets/img/ARSY_CIRCLE_GREEN_PNG.png" className="profile-pic-animation" />
         </IonCol>
         <IonCol size="8">
           <IonCardHeader>

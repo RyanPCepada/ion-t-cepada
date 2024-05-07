@@ -105,6 +105,8 @@ const cardData = [
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
+        <img alt="Profile" id="profile_pic" src="https://raw.githubusercontent.com/RyanPCepada/ion-t-cepada/main/src/assets/img/GALAXY_GIF.gif"
+          style={{width:'100%', position: 'absolute'}}/>
           <IonHeader collapse="condense">
             <IonToolbar>
               <IonTitle size="large">Home</IonTitle>
