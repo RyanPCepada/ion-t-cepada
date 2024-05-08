@@ -163,7 +163,7 @@ const TodoList: React.FC = () => {
   return (
     <IonPage className="home-page">
       <img alt="Profile" id="profile_pic" src="https://raw.githubusercontent.com/RyanPCepada/ion-t-cepada/main/src/assets/img/GALAXY_GIF.gif"
-        style={{height:'100%', position: 'absolute'}}/>
+        style={{width:'100%', position: 'absolute'}}/>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
