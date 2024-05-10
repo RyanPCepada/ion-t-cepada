@@ -26,7 +26,6 @@ import {
   IonBadge
 } from '@ionic/react';
 
-
 //Custom CSS
 import './Home.css';
 
@@ -42,7 +41,7 @@ const cardData = [
     title: 'Click Counter',
     icon: speedometerOutline,
     subtitle: 'Applet #1',
-    link: '/clickcounter',
+    link: '/ion-t-cepada/clickcounter',
     tags: {
       tag1: logoIonic,
       tag2: logoReact
@@ -53,7 +52,7 @@ const cardData = [
     title: 'Calculator',
     icon: calculator,
     subtitle: 'Applet #2',
-    link: '/calculator',
+    link: '/ion-t-cepada/calculator',
     tags: {
       tag1: logoIonic,
       tag2: logoReact
@@ -63,17 +62,17 @@ const cardData = [
     title: 'To Do List',
     icon: pencil,
     subtitle: 'Applet #3',
-    link: '/todolist',
+    link: '/ion-t-cepada/todolist',
     tags: {
       tag1: logoIonic,
       tag2: logoReact
     }
   },
   {
-    title: 'Quotes Generator',
+    title: 'Quote Generator',
     icon: chatbubble,
     subtitle: 'Applet #4',
-    link: '/quotesgenerator',
+    link: '/ion-t-cepada/quotesgenerator',
     tags: {
       tag1: logoIonic,
       tag2: logoReact
@@ -83,7 +82,7 @@ const cardData = [
     title: 'Notes',
     icon: readerOutline,
     subtitle: 'Applet #5',
-    link: '/notes',
+    link: '/ion-t-cepada/notes',
     tags: {
       tag1: logoIonic,
       tag2: logoReact, 
@@ -92,78 +91,6 @@ const cardData = [
   }
   
 ];
-
-  const goToClickCounter = () => {
-    history.push('/click_counter');
-  };
-
-  const goToCalculator = () => {
-    history.push('/calculator');
-  };
-
-  const goToTodolist = () => {
-    history.push('/todolist');
-  };
-
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Home</IonTitle>
-        </IonToolbar>
-        <hr />
-      </IonHeader>
-      <IonContent fullscreen className="ion-padding">
-        <div className="ion-text-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-          <div> {/* Centering content */}
-
-            <IonCard id="card1" onClick={goToClickCounter} style={{ width: '350px', cursor: 'pointer' }}>
-              <IonCardContent style={{ height: '70px', fontSize: '30px', display: 'flex', alignItems: 'center', padding: 0 }}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', flex: '20%', backgroundColor: 'var(--ion-color-light)', padding: 0 }}>
-                  {/* <IonIcon icon={pulseOutline} slot="start" /> */}
-                  <img alt="" id="click_counter" src="../src/assets/img/clickcounter_gif.gif" />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', flex: '80%', backgroundColor: 'var(--ion-color-primary)', color: 'white', padding: 0 }}>
-                  Click Counter
-                </div>
-              </IonCardContent>
-            </IonCard>
-
-            <IonCard id="card2" onClick={goToCalculator} style={{ width: '350px', cursor: 'pointer' }}>
-              <IonCardContent style={{ height: '70px', fontSize: '30px', display: 'flex', alignItems: 'center', padding: 0 }}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', flex: '20%', backgroundColor: 'var(--ion-color-light)', padding: 0 }}>
-                  {/* <IonIcon icon={calculatorOutline} slot="start" /> */}
-                  <img alt="" id="calculator" src="../src/assets/img/calculator_gif.gif" />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', flex: '80%', backgroundColor: 'var(--ion-color-secondary)', color: 'white', padding: 0 }}>
-                  Calculator
-                </div>
-              </IonCardContent>
-            </IonCard>
-
-            
-            <IonCard id="card2" onClick={goToTodolist} style={{ width: '350px', cursor: 'pointer' }}>
-              <IonCardContent style={{ height: '70px', fontSize: '30px', display: 'flex', alignItems: 'center', padding: 0 }}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', flex: '20%', backgroundColor: 'var(--ion-color-light)', padding: 0 }}>
-                  <img alt="" id="todolist" src="../src/assets/img/todolist_gif.gif" />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', flex: '80%', backgroundColor: 'var(--ion-color-success)', color: 'white', padding: 0 }}>
-                  Todo List
-                </div>
-              </IonCardContent>
-            </IonCard>
-
-            <IonCard id="card4" style={{ width: '350px', cursor: 'pointer' }}>
-              <IonCardContent style={{ height: '70px', fontSize: '30px', display: 'flex', alignItems: 'center', padding: 0 }}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', flex: '20%', backgroundColor: 'var(--ion-color-light)', padding: 0 }}>
-                  <IonIcon slot="start" />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', flex: '80%', backgroundColor: 'var(--ion-color-warning)', color: 'white', padding: 0 }}>
-                  
-                </div>
-              </IonCardContent>
-            </IonCard>
-
 
   const Home: React.FC = () => {
 
@@ -177,7 +104,9 @@ const cardData = [
             <IonTitle>Home</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonContent fullscreen>
+        <IonContent fullscreen className="home-content">
+        {/* <img alt="Profile" id="profile_pic" src="https://raw.githubusercontent.com/RyanPCepada/ion-t-cepada/main/src/assets/img/GALAXY_GIF.gif"
+          style={{width:'100%', position: 'absolute'}}/> */}
           <IonHeader collapse="condense">
             <IonToolbar>
               <IonTitle size="large">Home</IonTitle>
@@ -193,7 +122,7 @@ const cardData = [
           {cardData
             .filter((card) => card.title.toLowerCase().includes(searchTerm.toLowerCase()))
             .map((card, index) => (
-              <IonCard key={index} href={card.link} id="card_body">
+              <IonCard key={index} routerLink={card.link} routerDirection='forward' id="card_body">
                 <IonCardHeader>
                   <IonCardTitle>
                     <IonGrid>
@@ -217,11 +146,6 @@ const cardData = [
     );
   };
   
-
   //
   export default Home;
-
-};
-
-export default Home;
-
+  

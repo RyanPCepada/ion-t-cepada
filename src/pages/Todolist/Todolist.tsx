@@ -162,12 +162,14 @@ const TodoList: React.FC = () => {
 
   return (
     <IonPage className="home-page">
+      <img alt="Profile" id="profile_pic" src="https://raw.githubusercontent.com/RyanPCepada/ion-t-cepada/main/src/assets/img/GALAXY_GIF.gif"
+        style={{width:'100%', position: 'absolute'}}/>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
-          <IonTitle>Todo</IonTitle>
+          <IonTitle>To Do List</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">

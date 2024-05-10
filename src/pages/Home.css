@@ -9,8 +9,8 @@
 
 
 .home-page {
-  background-image: url('../src/assets/img/GALAXY_GIF.gif');
-  background-size: cover;
+  background-image: url('https://raw.githubusercontent.com/RyanPCepada/ion-t-cepada/main/src/assets/img/GALAXY_GIF.gif');
+  /* background-size: cover; */
   /* Add any additional styling you need */
 }
 
@@ -31,11 +31,8 @@ border-radius: 50%;
 background-color: blue;
 }
 
-/* #card1, #card2, #card3, #card4 {
-  transition: transform 0.3s ease !important;
+.home-content {
+  background-image: url('https://raw.githubusercontent.com/RyanPCepada/ion-t-cepada/main/src/assets/img/GALAXY_GIF.gif');
+  background-size: cover;
+  background-attachment: fixed;
 }
-
-#card1:hover, #card2:hover, #card3:hover, #card4:hover {
-  transform: scale(1.05) !important;
-
-
